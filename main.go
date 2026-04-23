@@ -33,7 +33,8 @@ func main() {
 	flag.StringVar(&grafanaToken, "grafana-token", os.Getenv("GRAFANA_API_KEY"), "Grafana API token for authentication")
 	flag.StringVar(&transport, "transport", getEnvOrDefault("MCP_TRANSPORT", "stdio"), "Transport type: stdio or sse")
 	flag.StringVar(&addr, "addr", getEnvOrDefault("MCP_ADDR", ":8080"), "Address to listen on (only used with sse transport)")
-	flag.StringVar(&logLevel, "log-level", getEnvOrDefault("LOG_LEVEL", "info"), "Log level: debug, info, warn, error")
+	// Default to debug level locally for easier development
+	flag.StringVar(&logLevel, "log-level", getEnvOrDefault("LOG_LEVEL", "debug"), "Log level: debug, info, warn, error")
 	flag.BoolVar(&showVersion, "version", false, "Print version information and exit")
 	flag.Parse()
 
