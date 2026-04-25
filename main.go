@@ -34,8 +34,8 @@ func main() {
 	flag.StringVar(&transport, "transport", getEnvOrDefault("MCP_TRANSPORT", "stdio"), "Transport type: stdio or sse")
 	// Changed default port from 8080 to 8081 to avoid conflicts with other local services on my machine
 	flag.StringVar(&addr, "addr", getEnvOrDefault("MCP_ADDR", ":8081"), "Address to listen on (only used with sse transport)")
-	// Default to info level to reduce noise in personal usage
-	flag.StringVar(&logLevel, "log-level", getEnvOrDefault("LOG_LEVEL", "info"), "Log level: debug, info, warn, error")
+	// Default to debug level for personal usage to make it easier to troubleshoot issues locally
+	flag.StringVar(&logLevel, "log-level", getEnvOrDefault("LOG_LEVEL", "debug"), "Log level: debug, info, warn, error")
 	flag.BoolVar(&showVersion, "version", false, "Print version information and exit")
 	flag.Parse()
 
@@ -111,10 +111,4 @@ func setupLogger(level string) *slog.Logger {
 	}))
 }
 
-// getEnvOrDefault returns the value of an environment variable or a default value.
-func getEnvOrDefault(key, defaultVal string) string {
-	if val := os.Getenv(key); val != "" {
-		return val
-	}
-	return defaultVal
-}
+// getEnvOrDefault returns the value of an environment var
