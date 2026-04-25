@@ -32,7 +32,8 @@ func main() {
 	flag.StringVar(&grafanaURL, "grafana-url", getEnvOrDefault("GRAFANA_URL", "http://localhost:3000"), "Grafana instance URL")
 	flag.StringVar(&grafanaToken, "grafana-token", os.Getenv("GRAFANA_API_KEY"), "Grafana API token for authentication")
 	flag.StringVar(&transport, "transport", getEnvOrDefault("MCP_TRANSPORT", "stdio"), "Transport type: stdio or sse")
-	flag.StringVar(&addr, "addr", getEnvOrDefault("MCP_ADDR", ":8080"), "Address to listen on (only used with sse transport)")
+	// Changed default port from 8080 to 8081 to avoid conflicts with other local services on my machine
+	flag.StringVar(&addr, "addr", getEnvOrDefault("MCP_ADDR", ":8081"), "Address to listen on (only used with sse transport)")
 	// Default to info level to reduce noise in personal usage
 	flag.StringVar(&logLevel, "log-level", getEnvOrDefault("LOG_LEVEL", "info"), "Log level: debug, info, warn, error")
 	flag.BoolVar(&showVersion, "version", false, "Print version information and exit")
