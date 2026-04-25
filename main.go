@@ -61,6 +61,12 @@ func main() {
 		os.Exit(1)
 	}
 
+	// Warn if no API token is set; read-only endpoints may still work but
+	// authenticated ones will fail with 401.
+	if grafanaToken == "" {
+		slog.Warn("no grafana API token provided; some endpoints may be unavailable")
+	}
+
 	cfg := &server.Config{
 		GrafanaURL:   grafanaURL,
 		GrafanaToken: grafanaToken,
